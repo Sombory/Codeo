@@ -1,0 +1,114 @@
+library(stringr)
+library(rvest)
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+
+
+ht <- read_html('https://www.google.com.ar/search?q=alquileres+departamentos')
+ht1 <- read_html('https://www.google.com.ar/search?q=alquiler')
+
+
+# Busco en ht desde el nodo "'//h3/a'" hasta "href" y luego ht1 busco =
+links <- append (ht %>% html_nodes(xpath='//h3/a') %>% html_attr('href'), (ht1 %>% html_nodes(xpath='//h3/a') %>% html_attr('href')))
+links
+
+# luego puedo cortar todo lo que sigue desde "&"
+links<-gsub('/url\\?q=','',sapply(strsplit(links[as.vector(grep('url',links))],split='&'),'[',1))
+links
+
+# Con este rango de caracteres de html me genera una base de las palabras presisa que quiero
+titulo<-append (ht %>% 
+                  html_nodes(".r") %>%
+                  html_text(),ht1 %>% 
+                  html_nodes(".r") %>%
+                  html_text())
+titulo
+
+tabla<-as.data.frame(cbind(Info))
+Info<-append(ht %>% 
+               html_nodes(".ads-ad") %>%
+               html_text(),ht1 %>% 
+               html_nodes(".ads-ad") %>%
+               html_text())
+
+Info<- gsub("[[:cntrl:]]", " ", Info)
+
+publicidad<-as.data.frame(Info)
+
+
+cheq<-str_locate(publicidad$Info, "¿Por qué este anuncio?" )
+publicidad$titulos1<-substr(publicidad$Info,1,cheq)
+cheq1<-str_locate(publicidad$Info, "Anunciowww" )
+publicidad$dominio<-substr(publicidad$Info,cheq1+11,cheq-1)
+publicidad$tipo<-"Publicidad"
+publicidad$website<-publicidad$dominio
+
+tabla1<-rbind(tabla,publicidad)
+rm(cheq, cheq1, ht, ht1, publicidad,tabla,titulos,Info,is.na,links,titulo,titulos1)
+tabla1$total<-1
+
+windows()
+tabla1 %>%
+  count(dominio, sort = TRUE) %>%
+  mutate(dominio = reorder(dominio,n)) %>%
+  na.omit() %>%
+  top_n(20) %>%
+  ggplot(aes(x = dominio,y = n)) +
+  theme_light() +
+  geom_col() +
+  coord_flip() +
+  labs(x = "dominio",
+       y = "freq",
+       title = "Sitios en google search",
+       fill= "tipo")
+
+windows()
+ggplot(tabla1, aes(x=total, fill=tipo))+
+  geom_bar(width = 1)+
+  coord_polar("y")+
+  labs(x = "porcentaje",
+       y = "freq",
+       title = "Sitios en google search",
+       fill= "Tipo de sitio")
+
+Info<- gsub("[[:cntrl:]]", " ", Info)
+
+publicidad<-as.data.frame(Info)
+
+
+cheq<-str_locate(publicidad$Info, "¿Por qué este anuncio?" )
+publicidad$titulos1<-substr(publicidad$Info,1,cheq)
+cheq1<-str_locate(publicidad$Info, "Anunciowww" )
+publicidad$dominio<-substr(publicidad$Info,cheq1+11,cheq-1)
+publicidad$tipo<-"Publicidad"
+publicidad$website<-publicidad$dominio
+
+tabla1<-rbind(tabla,publicidad)
+rm(cheq, cheq1, ht, ht1, publicidad,tabla,titulos,Info,is.na,links,titulo,titulos1)
+tabla1$total<-1
+
+windows()
+tabla1 %>%
+  count(dominio, sort = TRUE) %>%
+  mutate(dominio = reorder(dominio,n)) %>%
+  na.omit() %>%
+  top_n(20) %>%
+  ggplot(aes(x = dominio,y = n)) +
+  theme_light() +
+  geom_col() +
+  coord_flip() +
+  labs(x = "dominio",
+       y = "freq",
+       title = "Sitios en google search",
+       fill= "tipo")
+
+windows()
+ggplot(tabla1, aes(x=total, fill=tipo))+
+  geom_bar(width = 1)+
+  coord_polar("y")+
+  labs(x = "porcentaje",
+       y = "freq",
+       title = "Sitios en google search",
+       fill= "Tipo de sitio")

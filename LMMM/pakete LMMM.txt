@@ -1,0 +1,24 @@
+# LMMM 
+
+# ojo antes de hacer todo el proceso R debe estar instalado de la siguiente manera
+
+# C:\\R\R-3.4.2 
+
+# Descargar de siguiente link la versión q corresponda 65 mb
+http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html
+ 
+install.packages(c("plyr","dplyr","googleVis","shiny","lubridate","data.table","lme4","DT","scatterD3","XLConnect","reshape2","HH","lmtest","tseries","rhandsontable","pbapply","jsonlite","devtools"))
+library(devtools)
+devtools::install_github("jrowen/rhandsontable")
+
+
+# Una vez intalados los pasos básicos intalo el Lmmm package
+
+install.packages("C:\\Users\\ezequiel.eliano\\Downloads\\lmmm_2.4.3.zip",repos=NULL)
+install.packages("C:\\Users\\ezequiel.eliano\\AppData\\Local\\Temp\\RtmpwTvuV0\\lmmm_2.1.0.zip",repos=NULL)
+install.packages("lmmm")
+library(lmmm)
+
+#entrar en la pag
+data(celeb.mod.trans)
+buildModel(celeb.mod.trans)

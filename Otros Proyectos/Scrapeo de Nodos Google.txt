@@ -1,0 +1,91 @@
+Scrapeo de datos¡¡
+
+################################################
+
+##
+## Ejemplo con IMDB: 6 Degrees ofKevin Bacon
+##
+################################################
+#
+# Ernesto Calvo
+# University of Maryland
+# 2017
+#
+################################################
+
+
+#install.packages("rvest")
+library(rvest)
+library(igraph)
+
+kevin<- read_html("http://www.imdb.com/name/nm0000102/?ref_=tt_cl_t1")
+
+extract <- html_nodes(kevin, "div.filmo-row")
+m.select<-which(names(unlist(html_attrs(extract)))=="id")
+movies<-unlist(html_attrs(extract))[m.select]%>%strsplit("-")%>%sapply(function(x) x[2])
+
+movies<-unname(movies)
+
+#alternatives
+mov.doc<- read_html(paste("http://www.imdb.com/title/",movies[1], sep=""))
+cast.list<-html_table(mov.doc)[[1]][,2]
+#or
+cast <- html_text(html_nodes(mov.doc, "#titleCast span.itemprop"))
+
+##collect for all movies##
+N<-length(m.select)
+to.store <- vector("list",N)
+for(i in 1:length(movies)){
+  mov.doc<- read_html(paste("http://www.imdb.com/title/",movies[i], sep=""))
+  cast <- html_text(html_nodes(mov.doc, "#titleCast span.itemprop"))
+  to.store[[i]]<-cbind(movie=rep(movies[i],length(cast)),cast)
+}
+
+####################
+##
+## Network of Actors
+##
+####################
+
+data.net<-unname(to.store[[2]][,c(2,1)])
+for(i in 3:N){
+  data.net<-rbind(data.net,unname(to.store[[i]][,c(2,1)]))
+}
+
+T <- xtabs(~data.net[,1]+data.net[,2])
+Tt<-T%*%t(T)
+
+
+# Abrimos un objeto Tiff para guardar el grafico de las tres redes. Va a ser grabado en nuestro
+# directorio de trabajo
+
+my.net<-Tt
+net<-graph.adjacency(my.net,mode="undirected",weighted=TRUE,diag=FALSE) #grÃ¡fico no dirigido
+summary(net)
+system.time(l <- layout_with_fr(net, grid = c("nogrid")))
+my.com.fast <- walktrap.community(net)
+d<- degree(net)
+
+##Con Edges
+pdf(file = "Kevin.pdf", 40, 40, pointsize=12, compress=FALSE)
+#tiff(filename = "Argentina-Networks.tiff", width = 8, height = 8, units = "in", pointsize = 12, compression = c("none"), bg = "white", res = 300)
+plot.igraph(net,layout=l, vertex.color=my.com.fast$membership, vertex.frame.color=my.com.fast$membership, vertex.size=log(d+1)/10, edge.width=E(net)$weight/5, vertex.label.cex=.05, edge.curved=TRUE, edge.lty=3, edge.width=.3, edge.color="beige")
+dev.off()
+
+
+##Sin Edges
+pdf(file = "Kevin-SE.pdf", 40, 40, pointsize=12, compress=FALSE)
+#tiff(filename = "Argentina-Networks.tiff", width = 8, height = 8, units = "in", pointsize = 12, compression = c("none"), bg = "white", res = 300)
+
+plot.igraph(net,layout=l, vertex.color=my.com.fast$membership, vertex.frame.color=my.com.fast$membership, vertex.size=log(d+1)/10, edge.width=E(net)$weight/5, vertex.label.cex=.05, edge.curved=TRUE, edge.lty=3, edge.width=.3, edge.color="NA")
+dev.off()
+
+
+
+
+#Seguir recomendados
+
+peli<- read_html("https://www.imdb.com/title/tt0944947/")
+extract <- html_nodes(peli, ".rec_overview")
+html_attrs(extract)
+temp<-html_attr(extract,"data-tconst")

@@ -1,0 +1,14 @@
+GML
+
+# Modelo logit and Probit ((modelo de regresión general lineal model ""gml""))
+# Modelos binomianles cuando hay un N chicos
+
+mice <- data.frame(stillb=c(15,17,22,38,144),total=c(297,242,312,299,285),conc=c(0,62,5,125,500))
+mice$resp <- cbind(mice$stillb,mice$total-mice$stillb)
+
+# corro el modelo glm
+
+mice.glm <- glm(resp~conc,family = binomial(link = logit),data=mice)
+
+#quiero ver el gráfico
+plot(mice.glm)

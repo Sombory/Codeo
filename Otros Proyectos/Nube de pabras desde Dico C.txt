@@ -1,0 +1,48 @@
+### NUbe de palabras ### 
+
+library(tm)
+library(ggplot2)
+library(reshape2)
+library(wordcloud)
+library(RWeka)
+options(mc.cores=1)
+
+# Buscar en la C:
+setwd("C:/Users/ezequiel.eliano/Desktop/youtube")
+getwd()
+path = "./review_polarity/txt_sentoken/"
+
+
+
+dir = DirSource(paste(path,"pos/",sep=""), encoding = "UTF-8")
+corpus = Corpus(dir)
+
+#Check how many documents have been loaded.
+length(corpus)
+
+corpus[[1]]
+
+# Define custom stop words for our corpus. Son la palabras que se quitan o inecesarias para el analisis
+myStopwords = c(stopwords(),"film","films","movie","movies")
+
+# armo la matriz, removiendo puntuaciones, numeros etc.
+tdm = TermDocumentMatrix(corpus,
+                         control=list(stopwords = myStopwords,
+                                      removePunctuation = T, 
+                                      removeNumbers = T,
+                                      stemming = T))
+
+# Choose a nice range of blue colors for the wordcloud.
+# You can invoke the display.brewer.all function to see the whole palette.
+pal=brewer.pal(8,"Blues")
+pal=pal[-(1:3)]
+
+# Extract the frequency of each term and set the random number generator seed to some value (this way, we will always get the same word cloud).
+freq = sort(rowSums(as.matrix(tdm)), decreasing = T)
+set.seed(1234)
+
+# Create the wordcloud with those terms that appear at least 400 times.
+word.cloud=wordcloud(words=names(freq), freq=freq,
+                     min.freq=600, random.order=F, colors=pal)
+
+
