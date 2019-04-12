@@ -64,7 +64,7 @@ acces_token_secret <- "lwhBGqm62Ta40cUK3ncaItypc8smCjlwS4R1TgHpSJHI9"
 setup_twitter_oauth(api_key,api_secret,acces_token,acces_token_secret)
 
 # SCRAPEO palabra "trum"
-some_tweets <- searchTwitter("trump", n = 10, since= "2016-01-01", lang="en")
+some_tweets <- searchTwitter("trump", n = 2000, since= "2016-01-01", lang="en")
 View(some_tweets)
 lenght.some_tweets <- length(some_tweets)
 lenght.some_tweets
@@ -107,13 +107,11 @@ SentimentScore
 
 names(SentimentScore) <- "Score"
 SentimentScore <- cbind("sentiment" = row.names(SentimentScore),SentimentScore)
-
 rownames(SentimentScore) <- NULL
 
 ### antes de correr // ordeno el data frame
 names(SentimentScore) <- c("repetido", "sentiment", "Score")
 SentimentScore$repetido <- NULL
-
 SentimentScore
 
 ## por algún motivo NO lo está tomando al gráfico //
