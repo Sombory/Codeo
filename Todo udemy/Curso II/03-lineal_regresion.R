@@ -66,6 +66,9 @@ summary(mod)
 #acaike informacion complement AIC ---  si sindicamos fowar va agregando variables a partir de un modelo nulo 
 # y si le ponemos backward va quitando varaibles a partir de un modelo completo
 step.model <- stepAIC(mod, direction="forward")
+
+# con Backward va eliminando variables hasta que se queda con 
+# mpg ~ cylinders + horsepower + weight (y dice que displacement y acceleration no son relevantes)
 step.model <- stepAIC(mod, direction="backward")
 summary(step.model)
 step.model
