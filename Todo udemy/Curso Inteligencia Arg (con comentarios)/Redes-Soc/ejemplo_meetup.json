@@ -1,0 +1,18 @@
+{
+"results": [ ],
+"meta": {
+"next": "",
+"method": "Groups",
+"total_count": 0,
+"link": "https://api.meetup.com/2/groups",
+"count": 0,
+"description": "None",
+"lon": -3.7100000381469727,
+"title": "Meetup Groups v2",
+"url": "https://api.meetup.com/2/groups?country=es&offset=0&city=Madrid&sign=True&format=json&lon=-3.71000003815&topic=mathematics&photo-host=public&page=20&radius=100.0&fields=&lat=40.4199981689&order=id&desc=false",
+"signed_url": "https://api.meetup.com/2/groups?country=es&offset=0&city=Madrid&format=json&lon=-3.71000003815&topic=mathematics&photo-host=public&page=20&radius=100.0&fields=&lat=40.4199981689&order=id&desc=false&sig_id=280599238&sig=6cb627e55343afa2fb968e38661e07b03a28ff1c",
+"id": "",
+"updated": 0,
+"lat": 40.41999816894531
+}
+}

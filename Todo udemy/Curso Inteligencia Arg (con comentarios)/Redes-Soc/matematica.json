@@ -1,0 +1,94 @@
+{
+"results": [
+{
+"utc_offset": 7200000,
+"country": "ES",
+"visibility": "public",
+"city": "Valencia",
+"timezone": "Europe/Madrid",
+"created": 1556793082000,
+"topics": [
+{
+"urlkey": "teachers",
+"name": "Profesores",
+"id": 391
+},
+{
+"urlkey": "homeschool",
+"name": "Escolarización en casa",
+"id": 603
+},
+{
+"urlkey": "edtech",
+"name": "Educación y tecnología",
+"id": 7203
+},
+{
+"urlkey": "education",
+"name": "Educación",
+"id": 8476
+},
+{
+"urlkey": "parents",
+"name": "Madres y padres",
+"id": 10333
+},
+{
+"urlkey": "learning",
+"name": "Aprendizaje",
+"id": 18296
+},
+{
+"urlkey": "math-tutor",
+"name": "Math Tutor",
+"id": 19020
+},
+{
+"urlkey": "mathematics",
+"name": "Mathematics",
+"id": 33876
+},
+{
+"urlkey": "homeschool-support",
+"name": "Ayuda para la escolarización en casa",
+"id": 35192
+}
+],
+"link": "https://www.meetup.com/GoWin-Method-a-different-way-of-learning-mathematics/",
+"rating": 0,
+"description": "<p>The mission of the GoWin method is to help parents prevent failure in maths for your child, by teaching him the basic ideas of arithmetic in a simple and clear way, which will not be his experience in general in primary school.<br>It’s a lot easier to prevent than to cure.<br>The fear of math and failure in math reinforce each other to form a vicious circle.<br>Mathematical skill and the love of maths reinforce each other to form a virtuous circle.<br>Concerned parents want to make sure that their child will start on a vituous circle from the beginning.<br>From the point of view of parents trying to prevent failure in maths, what’s important is that their child likes maths from the start because he is presented with ideas explained simply and clearly.<br>This group is made for all parents who want to find better methods to teach their children, so let's get together and learn together.</p>",
+"lon": -0.38999998569488525,
+"join_mode": "open",
+"organizer": {
+"member_id": 223539706,
+"name": "Paul Gouin"
+},
+"members": 4,
+"name": "GoWin Method, a different way of learning mathematics",
+"id": 31790790,
+"urlname": "GoWin-Method-a-different-way-of-learning-mathematics",
+"category": {
+"name": "education/learning",
+"id": 6,
+"shortname": "education-learning"
+},
+"lat": 39.47999954223633,
+"who": "Members"
+}
+],
+"meta": {
+"next": "",
+"method": "Groups",
+"total_count": 1,
+"link": "https://api.meetup.com/2/groups",
+"count": 1,
+"description": "None",
+"lon": -3.7100000381469727,
+"title": "Meetup Groups v2",
+"url": "https://api.meetup.com/2/groups?country=es&offset=0&city=Madrid&sign=True&format=json&lon=-3.71000003815&topic=mathematics&photo-host=public&page=20&radius=200.0&fields=&lat=40.4199981689&order=id&desc=false",
+"signed_url": "https://api.meetup.com/2/groups?country=es&offset=0&city=Madrid&format=json&lon=-3.71000003815&topic=mathematics&photo-host=public&page=20&radius=200.0&fields=&lat=40.4199981689&order=id&desc=false&sig_id=280599238&sig=6cb627e55343afa2fb968e38661e07b03a28ff1c",
+"id": "",
+"updated": 1557218020000,
+"lat": 40.41999816894531
+}
+}

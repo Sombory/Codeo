@@ -49,7 +49,7 @@ acces_token_secret <- "lwhBGqm62Ta40cUK3ncaItypc8smCjlwS4R1TgHpSJHI9"
 setup_twitter_oauth(api_key,api_secret,acces_token,acces_token_secret)
 
 #scrapero una palabra ej: "machinelarning"
-tweets <- searchTwitter("machinelearning", n = 1500, lang="en")
+tweets <- searchTwitter("rosario", n = 1500, lang="en")
 View(tweets)
 
 # Me quedo con los textos
