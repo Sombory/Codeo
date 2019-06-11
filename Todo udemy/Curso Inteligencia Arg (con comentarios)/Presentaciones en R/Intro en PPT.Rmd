@@ -1,0 +1,87 @@
+---
+title: "Nueva Prueva"
+author: "Ezequiel Eliano"
+output:
+  beamer_presentation: default
+  ioslides_presentation: default
+---
+
+```{r, my_chunk}
+2+2
+```
+***
+### R Prueba para Exportar HTML
+
+Este es un fichero creado por **Ezequiel Eliano**
+
+<p>This is an R Markdown document. <i>Markdown</i> is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see</p> <http://rmarkdown.rstudio.com>.
+
+<!-- Estos es un comentario -->
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+<!-- Armo una talba -->
+###  HTML Contents
+<p> Esto es un nuevo parrafo escrtito con etiquetas HTML</p>
+<table border=1>
+<th>Ventajas</th>
+<th>Inconvenintes</th>
+
+<tr>
+<td> Es facil de utilizar
+<td> Necesito prevision y planning 
+</td>
+<tr>
+<td>Puede exportar a multiples formatos</td>
+<td>Necesitamos conocer otras tecnologias</td>
+</tr>
+</table>
+
+## Agregar Codigo
+### Setiar el directorio
+
+Se puede definir cualquier codigo en *R* haciendo uso de los tres acentos
+agudos.
+
+* El parametro echo=FALSE, indica que el chunk no se mostrará con el documento
+Tambien se puede definir las opciones de mostrar o no los Chunks de forma global en todo el documento
+* También se puede definir una caché global para no sobre cargar la generación de ficheros
+* Se puede definir el directorio raíz de donde cargar cualquier fichero de datos haciendo uso del parámetro root.dir
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = T)
+knitr::opts_chunk$set(cache = T)
+knitr::opts_chunk$set(root.dir= "../Codeo R/Codeo/Nuevo udemy II/Datos Inteligencia-Artificial/r-course/data/tema10/")
+```
+
+### Loading Data
+
+```{r loadingData, echo=FALSE}
+  auto <- read.csv("C:/Users/ezequiel.eliano/Desktop/Codeo R/Codeo/Nuevo udemy II/Datos Inteligencia-Artificial/r-course/data/tema10/auto-mpg.csv")
+```
+
+Despues de cargar los datos, solemos mirar información acerca de los primeros elementos del data frame, la estructura de las columnas del mismo o incluso un resumen de las estadísticas básicas
+
+```{r}
+  head(auto)
+  str(auto)
+  summary(auto)
+```
+
+### Plot Data
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE, fig.height=6, fig.width=9}
+  plot(auto$mpg~auto$weight)
+```
+
+### Incline R
+
+Hemos hecho uso de un data frame de autos que contiene `r nrow(auto)` muestras de coches y cada uno de ellos tienen `r ncol(auto)` varaibles.
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
